@@ -1,0 +1,70 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.355122222222222,
+        "y": 1.0921777777777766
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.15426954068556,
+        "y": 0.7671290246077536
+      },
+      "isLocked": false,
+      "linkedName": "Drum shoot 2"
+    },
+    {
+      "anchor": {
+        "x": 6.603700000000001,
+        "y": 3.8888333333333325
+      },
+      "prevControl": {
+        "x": 7.802266666666666,
+        "y": -0.476677777777776
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.4473029045643169,
+      "rotationDegrees": 0.0
+    },
+    {
+      "waypointRelativePos": 0.7377593360995801,
+      "rotationDegrees": -55.99142576358019
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Run Intake",
+      "waypointRelativePos": 0.6739454094292764,
+      "endWaypointRelativePos": 1.0,
+      "command": null
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.0,
+    "maxAcceleration": 5.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.5,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -40.46222749209347
+  },
+  "reversed": false,
+  "folder": "Full Drum Right Long Trench",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 52.83168953416109
+  },
+  "useDefaultConstraints": true
+}

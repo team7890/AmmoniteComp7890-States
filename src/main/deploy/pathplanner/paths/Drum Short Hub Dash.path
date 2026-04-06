@@ -1,0 +1,96 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.6571999999999996,
+        "y": 0.9654999999999996
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.677961369963435,
+        "y": 0.7163635604387797
+      },
+      "isLocked": false,
+      "linkedName": "Drum Short Shoot 1"
+    },
+    {
+      "anchor": {
+        "x": 6.301622222222222,
+        "y": 0.7121444444444445
+      },
+      "prevControl": {
+        "x": 6.100578186855643,
+        "y": 0.5635466791734934
+      },
+      "nextControl": {
+        "x": 6.525744444444444,
+        "y": 0.877800000000001
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 6.428299999999999,
+        "y": 3.723177777777777
+      },
+      "prevControl": {
+        "x": 6.428299999999999,
+        "y": 3.109277777777777
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.3136929460580978,
+      "rotationDegrees": 0.0
+    },
+    {
+      "waypointRelativePos": 0.8514522821576681,
+      "rotationDegrees": -16.998439027957133
+    },
+    {
+      "waypointRelativePos": 1.332780082987553,
+      "rotationDegrees": -66.813369542225
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Intake Pivot",
+      "waypointRelativePos": 0.6967741935483832,
+      "endWaypointRelativePos": 1.0818858560793994,
+      "command": null
+    },
+    {
+      "name": "Run Intake",
+      "waypointRelativePos": 1.1454094292803871,
+      "endWaypointRelativePos": 2.0,
+      "command": null
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.0,
+    "maxAcceleration": 5.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.5,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -59.620873988631566
+  },
+  "reversed": false,
+  "folder": "Full Drum Right Short Trench",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 57.75156488651745
+  },
+  "useDefaultConstraints": true
+}

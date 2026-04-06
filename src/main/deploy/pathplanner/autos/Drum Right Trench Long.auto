@@ -1,0 +1,55 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Drum Mid Travel 1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Drum First Shoot"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 3.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Drum Middle travel 2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Drum Second Shoot"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 3.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Drum Hub Dash"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "Drum",
+  "choreoAuto": false
+}

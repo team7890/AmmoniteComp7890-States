@@ -1,0 +1,88 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.6571999999999996,
+        "y": 0.9654999999999996
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.9300444444444445,
+        "y": 0.575722222222222
+      },
+      "isLocked": false,
+      "linkedName": "Drum Short Shoot 1"
+    },
+    {
+      "anchor": {
+        "x": 6.2236666666666665,
+        "y": 0.8485666666666658
+      },
+      "prevControl": {
+        "x": 5.804655555555556,
+        "y": 0.2931333333333317
+      },
+      "nextControl": {
+        "x": 6.414730530699098,
+        "y": 1.1018373701515167
+      },
+      "isLocked": false,
+      "linkedName": "Drum Back Way"
+    },
+    {
+      "anchor": {
+        "x": 6.798588888888889,
+        "y": 3.7718999999999996
+      },
+      "prevControl": {
+        "x": 6.769355555555555,
+        "y": 1.939944444444444
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Drum Short Mid 2"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.3734439834025011,
+      "rotationDegrees": 0.0
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Intake Pivot",
+      "waypointRelativePos": 0.7920595533498617,
+      "endWaypointRelativePos": 1.1533498759305192,
+      "command": null
+    },
+    {
+      "name": "Run Intake",
+      "waypointRelativePos": 1.0223325062034614,
+      "endWaypointRelativePos": 2.0,
+      "command": null
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.0,
+    "maxAcceleration": 5.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.5,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -68.31093503538419
+  },
+  "reversed": false,
+  "folder": "Full Drum Right Short Trench",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 57.75156488651745
+  },
+  "useDefaultConstraints": true
+}

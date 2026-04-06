@@ -1,0 +1,88 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 4.3917111111147475,
+        "y": 0.44904444444478253
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 5.726700000003637,
+        "y": 0.5075111111114483
+      },
+      "isLocked": false,
+      "linkedName": "Drum start"
+    },
+    {
+      "anchor": {
+        "x": 7.663007159904534,
+        "y": 0.8116587112171829
+      },
+      "prevControl": {
+        "x": 7.305300000003637,
+        "y": 0.5854666666670039
+      },
+      "nextControl": {
+        "x": 8.127366413110682,
+        "y": 1.105290991089894
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.972912237368297,
+        "y": 3.2746842807544385
+      },
+      "prevControl": {
+        "x": 7.997155555559193,
+        "y": 1.4332333333336702
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Drum middle 1"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.9633027522935769,
+      "rotationDegrees": -72.72557787132574
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Intake Pivot",
+      "waypointRelativePos": 0.0,
+      "endWaypointRelativePos": 0.5031446540880362,
+      "command": null
+    },
+    {
+      "name": "Run Intake",
+      "waypointRelativePos": 0.6253101736972682,
+      "endWaypointRelativePos": 2.0,
+      "command": null
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.0,
+    "maxAcceleration": 5.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.5,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -73.81079374297289
+  },
+  "reversed": false,
+  "folder": "Full Drum Right Long Trench",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -90.1987487987268
+  },
+  "useDefaultConstraints": true
+}

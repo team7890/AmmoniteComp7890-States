@@ -1,0 +1,61 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 4.381966666666667,
+        "y": 0.6536777777777774
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 4.011677777777778,
+        "y": 0.5757222222222219
+      },
+      "isLocked": false,
+      "linkedName": "Stupid Shoot"
+    },
+    {
+      "anchor": {
+        "x": 2.4818000000000002,
+        "y": 1.0434555555555551
+      },
+      "prevControl": {
+        "x": 2.715666666666667,
+        "y": 0.7998444444444444
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Drum shoot 1"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Shoot Slower",
+      "waypointRelativePos": 1.0,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.0,
+    "maxAcceleration": 5.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.5,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 54.374147793926596
+  },
+  "reversed": false,
+  "folder": "Full Drum Right Long Trench",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 0.5413949207575287
+  },
+  "useDefaultConstraints": true
+}

@@ -1,0 +1,110 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 7.972912237368297,
+        "y": 3.2746842807544385
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 7.617122222222221,
+        "y": 5.097144444444443
+      },
+      "isLocked": false,
+      "linkedName": "Drum middle 1"
+    },
+    {
+      "anchor": {
+        "x": 6.876544444438451,
+        "y": 1.3455333333301918
+      },
+      "prevControl": {
+        "x": 7.0688636635727145,
+        "y": 2.6559110289714063
+      },
+      "nextControl": {
+        "x": 6.725939219024516,
+        "y": 0.3193762538774967
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.4818000000000002,
+        "y": 1.0434555555555551
+      },
+      "prevControl": {
+        "x": 2.625501721869017,
+        "y": 0.8083072834062524
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Drum shoot 1"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.07800829875518653,
+      "rotationDegrees": -57.22800351888451
+    },
+    {
+      "waypointRelativePos": 0.43319502074688837,
+      "rotationDegrees": 73.86726521191994
+    },
+    {
+      "waypointRelativePos": 1.6049792531120364,
+      "rotationDegrees": 0.0
+    }
+  ],
+  "constraintZones": [
+    {
+      "name": "Trench run",
+      "minWaypointRelativePos": 1.0,
+      "maxWaypointRelativePos": 2.0,
+      "constraints": {
+        "maxVelocity": 5.0,
+        "maxAcceleration": 7.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.5,
+        "unlimited": false
+      }
+    }
+  ],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Run Intake",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": 1.2764267990074374,
+      "command": null
+    },
+    {
+      "name": "Shoot Slower",
+      "waypointRelativePos": 2.0,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.0,
+    "maxAcceleration": 5.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.5,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 54.374147793926596
+  },
+  "reversed": false,
+  "folder": "Full Drum Right Long Trench",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -73.81079374297289
+  },
+  "useDefaultConstraints": true
+}

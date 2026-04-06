@@ -1,0 +1,92 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.4818000000000002,
+        "y": 1.0434555555555551
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.6158555435882724,
+        "y": 0.7117172426132528
+      },
+      "isLocked": false,
+      "linkedName": "Drum shoot 1"
+    },
+    {
+      "anchor": {
+        "x": 6.4380444444444445,
+        "y": 0.6634222222222217
+      },
+      "prevControl": {
+        "x": 6.019033333333335,
+        "y": 0.5562333333333345
+      },
+      "nextControl": {
+        "x": 6.680245120563836,
+        "y": 0.7253805347178791
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 6.574466666666666,
+        "y": 3.723177777777777
+      },
+      "prevControl": {
+        "x": 6.925266666666666,
+        "y": 2.5538444444444433
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Drum Middle 2"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.4356846473029078,
+      "rotationDegrees": 0.0
+    },
+    {
+      "waypointRelativePos": 1.2697095435684564,
+      "rotationDegrees": -66.15331707981129
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Intake Pivot",
+      "waypointRelativePos": 0.5776674937965312,
+      "endWaypointRelativePos": 0.9985111662530837,
+      "command": null
+    },
+    {
+      "name": "Run Intake",
+      "waypointRelativePos": 0.8119106699751869,
+      "endWaypointRelativePos": 2.0,
+      "command": null
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.0,
+    "maxAcceleration": 5.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.5,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -69.67686317033701
+  },
+  "reversed": false,
+  "folder": "Full Drum Right Long Trench",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 54.374147793926596
+  },
+  "useDefaultConstraints": true
+}

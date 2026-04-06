@@ -1,0 +1,101 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 6.262644444444445,
+        "y": 3.849855555555555
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 7.246833333333334,
+        "y": 5.2920333333333325
+      },
+      "isLocked": false,
+      "linkedName": "Drum Short Mid 1"
+    },
+    {
+      "anchor": {
+        "x": 6.2236666666666665,
+        "y": 0.8485666666666658
+      },
+      "prevControl": {
+        "x": 6.848077069275309,
+        "y": 1.2945740971014064
+      },
+      "nextControl": {
+        "x": 6.019033333333331,
+        "y": 0.702399999999999
+      },
+      "isLocked": false,
+      "linkedName": "Drum Back Way"
+    },
+    {
+      "anchor": {
+        "x": 2.6571999999999996,
+        "y": 0.9654999999999996
+      },
+      "prevControl": {
+        "x": 2.598733333335439,
+        "y": 0.6049555555585449
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Drum Short Shoot 1"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.10788381742739148,
+      "rotationDegrees": -121.98728049028739
+    },
+    {
+      "waypointRelativePos": 0.1941908713693087,
+      "rotationDegrees": 109.8152394242032
+    },
+    {
+      "waypointRelativePos": 0.5759336099585137,
+      "rotationDegrees": 104.5003925533501
+    },
+    {
+      "waypointRelativePos": 1.5219917012447741,
+      "rotationDegrees": 0.0
+    }
+  ],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.7761786600496399,
+      "maxWaypointRelativePos": 2.0,
+      "constraints": {
+        "maxVelocity": 7.0,
+        "maxAcceleration": 7.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.5,
+        "unlimited": false
+      }
+    }
+  ],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 5.0,
+    "maxAcceleration": 5.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.5,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 57.75156488651745
+  },
+  "reversed": false,
+  "folder": "Full Drum Right Short Trench",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -113.74949449286676
+  },
+  "useDefaultConstraints": true
+}

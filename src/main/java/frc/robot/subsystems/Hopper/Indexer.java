@@ -1,0 +1,75 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot.subsystems.Hopper;
+
+import com.ctre.phoenix6.StatusCode;
+import com.ctre.phoenix6.StatusSignal;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.Follower;
+import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.signals.MotorAlignmentValue;
+import com.ctre.phoenix6.signals.NeutralModeValue;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.MotorIDs;
+import frc.robot.Constants;
+
+public class Indexer extends SubsystemBase {
+
+  private TalonFX objIndexerLeader = new TalonFX(MotorIDs.iIndexerLeader, "MechCAN");
+  private TalonFX objIndexerFollower = new TalonFX(MotorIDs. iIndexerFollower, "MechCAN");
+  private StatusCode objTalonFXStatusCode;
+  StatusSignal objStatusSignalLead;
+  StatusSignal objStatusSignalFollow;
+  /** Creates a new Hopper. */
+  public Indexer() {
+    TalonFXConfiguration objTalonFXConfig = new TalonFXConfiguration();
+    objTalonFXConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+    objTalonFXConfig.CurrentLimits.SupplyCurrentLimit = 30.0;
+    objTalonFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
+    objTalonFXConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+    objTalonFXConfig.OpenLoopRamps.VoltageOpenLoopRampPeriod = 0.1;
+    objTalonFXStatusCode = StatusCode.StatusCodeNotInitialized;
+
+    for (int i = 1; i < 5; i++) {
+      objTalonFXStatusCode = objIndexerLeader.getConfigurator().apply(objTalonFXConfig);
+      if (objTalonFXStatusCode.isOK()) break;
+    }
+
+     for (int i = 1; i < 5; i++) {
+      objTalonFXStatusCode = objIndexerFollower.getConfigurator().apply(objTalonFXConfig);
+      if (objTalonFXStatusCode.isOK()) break;
+    }
+
+    objIndexerFollower.setControl(new Follower(objIndexerLeader.getDeviceID(), MotorAlignmentValue.Opposed));
+  }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Hopper Sub/Index Lead", getLeadSpeed());
+    SmartDashboard.putNumber("Hopper Sub/Index Follow", getFollowSpeed());
+  }
+
+  public void runIndexer(double dSpeed){
+    objIndexerLeader.set(dSpeed);
+  }
+
+  public void stopIndexer(){
+    objIndexerLeader.stopMotor();
+  }
+
+  public double getLeadSpeed() {
+    objStatusSignalLead = objIndexerLeader.getVelocity();
+    return objStatusSignalLead.getValueAsDouble() * 60.0;  
+  }
+
+  public double getFollowSpeed() {
+    objStatusSignalFollow = objIndexerFollower.getVelocity();
+    return objStatusSignalFollow.getValueAsDouble() * 60.0;  
+  }
+}
