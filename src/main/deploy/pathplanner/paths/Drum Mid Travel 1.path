@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.3917111111147475,
-        "y": 0.44904444444478253
+        "x": 4.401455555555555,
+        "y": 0.488022222222221
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.726700000003637,
-        "y": 0.5075111111114483
+        "x": 5.7364444444444445,
+        "y": 0.546488888888887
       },
       "isLocked": false,
       "linkedName": "Drum start"
@@ -56,7 +56,7 @@
     {
       "name": "Intake Pivot",
       "waypointRelativePos": 0.0,
-      "endWaypointRelativePos": 0.5031446540880362,
+      "endWaypointRelativePos": 0.6610421836228187,
       "command": null
     },
     {
@@ -67,8 +67,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 5.0,
-    "maxAcceleration": 5.0,
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.5,
@@ -82,7 +82,7 @@
   "folder": "Full Drum Right Long Trench",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -90.1987487987268
+    "rotation": -89.71719365215553
   },
   "useDefaultConstraints": true
 }

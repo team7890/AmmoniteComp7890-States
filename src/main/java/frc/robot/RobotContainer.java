@@ -56,9 +56,11 @@ import frc.robot.subsystems.Hopper.Pivot;
 import frc.robot.subsystems.Hopper.Indexer;
 import frc.robot.subsystems.Shooter.Shooter;
 import frc.robot.subsystems.Shooter.Shooter_Hood;
+import frc.robot.util.Lights;
 import frc.robot.subsystems.Shooter.Feeder;
 import frc.robot.subsystems.Hopper.Intake;
 import frc.robot.commands.AimandShoot2;
+import frc.robot.commands.AimandShootXLock;
 import frc.robot.commands.Feed;
 import frc.robot.commands.Passing;
 import frc.robot.commands.ShooterSolo;
@@ -76,6 +78,8 @@ public class RobotContainer {
      private double MaxSpeed = 1.0 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     // private double MaxSpeed = 1.0 * TunerConstants_beta.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
+
+    private double dTableVar = 0;
 
     /* Setting up bindings for necessary control of the swerve drive platform */
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
@@ -108,9 +112,13 @@ public class RobotContainer {
     private final Pivot objPivot = new Pivot();
 
     /// added ///
-    private final Limelight limelight = new Limelight("limelight-genesis");
+    private final Limelight objLimelight = new Limelight("limelight-genesis");
 
-    private final Field2d field;
+    private final Field2d field = new Field2d();;
+
+    private final Lights objLights = new Lights();
+
+    
 
     // === PathPlanner === \\
     private final SendableChooser<Command> autoChooser;
@@ -121,6 +129,7 @@ public class RobotContainer {
 
         autoChooser = AutoBuilder.buildAutoChooser();
         SmartDashboard.putData("Auto Chooser", autoChooser);
+        SmartDashboard.putNumber("Shooter Sub/Interp Variable", dTableVar);
         //autoChooser.addOption("Chaos with Trench","Chaos with trench");
         // Command Chaos = AutoBuilder.buildAuto("Take 5");
 
@@ -132,18 +141,19 @@ public class RobotContainer {
         NamedCommands.registerCommand("Intake Pivot", getAutonomousCommand());
         NamedCommands.registerCommand("Print Message", getAutonomousCommand());
         NamedCommands.registerCommand("Run Intake", getAutonomousCommand());
-        NamedCommands.registerCommand("stop Shooter", new ShooterFull(objShooter, MotorSpeeds.dShooter3M, objFeeder, objIndexer, objIntake, objPivot));
+        NamedCommands.registerCommand("stop Shooter", new ShooterFull(objShooter, MotorSpeeds.dShooterTDist, objFeeder, objIndexer, objIntake, objPivot));
         NamedCommands.registerCommand("Run Intake", new RunCommand(()-> objIntake.runIntake(MaxSpeed)).withTimeout(5.0));
-        NamedCommands.registerCommand("Auto shots", new TrenchShotAuto(objShooter, MotorSpeeds.dShooter3M, objFeeder, objIndexer, objIntake, objPivot));
-        NamedCommands.registerCommand("Auto Shoot", new TrenchShotAuto(objShooter, MotorSpeeds.dShooter3M, objFeeder, objIndexer, objIntake, objPivot));
+        NamedCommands.registerCommand("Auto shots", new TrenchShotAuto(objShooter, MotorSpeeds.dShooterTDist, objFeeder, objIndexer, objIntake, objPivot));
+        NamedCommands.registerCommand("Auto Shoot", new TrenchShotAuto(objShooter, MotorSpeeds.dShooterTDist, objFeeder, objIndexer, objIntake, objPivot));
         
-        new EventTrigger("Run Intake").whileTrue(new RunCommand(()-> objIntake.runIntake(MotorSpeeds.dIntakeSpeed), objIntake));
+        new EventTrigger("Run Intake").whileTrue(new RunCommand(()-> objIntake.runIntake(0.425), objIntake));
         //new EventTrigger("Auto Shoot").whileTrue(new RunCommand(()-> objShooter.runShooterRPM(MotorSpeeds.dShooter3M), objShooter));
         new EventTrigger("Intake Pivot").whileTrue(new PivotIntake(objPivot, MotorSpeeds.dPivotSpeed));
         new EventTrigger("Shooter Run").whileTrue(new ShooterFull(objShooter, 2500, objFeeder, objIndexer, objIntake, objPivot));
-        new EventTrigger("Shoot Slower").whileTrue(new ShooterFull(objShooter, 3850, objFeeder, objIndexer, objIntake, objPivot));
-        new EventTrigger("Second Shot").whileTrue(new ShooterFull(objShooter, 3850, objFeeder, objIndexer, objIntake, objPivot));
-        
+        new EventTrigger("Shoot Slower").whileTrue(new ShooterFull(objShooter, 4150, objFeeder, objIndexer, objIntake, objPivot)); // === 3975
+        new EventTrigger("Second Shot").whileTrue(new ShooterFull(objShooter, 4550, objFeeder, objIndexer, objIntake, objPivot)); // === 4515
+        new EventTrigger("Lime Shoot").whileTrue(new AimandShoot2(objLimelight, drivetrain, objShooter, objFeeder, objIndexer, objIntake, objPivot, () -> 0.0, () -> 0.0));
+
         configureBindings();
 
       
@@ -154,8 +164,9 @@ public class RobotContainer {
   
    
 
-        field = new Field2d();
-            SmartDashboard.putData("Util/Field", field);
+    
+        field.getRobotPose();
+            SmartDashboard.putData("Util/BadField", field);
 
         
         
@@ -165,9 +176,11 @@ public class RobotContainer {
         // Note that X is defined as forward according to WPILib convention,
         // and Y is defined as to the left according to WPILib convention.
 
-        limelight.setDefaultCommand(updateVisionCommand());
+        objLimelight.setDefaultCommand(updateVisionCommand());
 
-                                             ///SET DEFAULTCOMANDS ///
+        
+
+                                             /// SET DEFAULTCOMANDS ///
         drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
@@ -187,7 +200,7 @@ public class RobotContainer {
         );
 
         objShooter.setDefaultCommand(
-            new RunCommand(()-> objShooter.runShooterRPM(4000.0), objShooter) //Original 0.15
+            new RunCommand(()-> objShooter.runShooterRPM(4000), objShooter) //Original 0.15
         );
 
         objPivot.setDefaultCommand(
@@ -198,9 +211,8 @@ public class RobotContainer {
             new RunCommand(() -> objIntake.stopIntake(), objIntake)
         );
 
-        objHood.setDefaultCommand(
-            objHood.stopHood()
-        );
+        
+
 
 
         
@@ -226,41 +238,70 @@ public class RobotContainer {
         // === Shooter == \\
         //xboxDriver.axisGreaterThan(3, 0.25).whileTrue(new ShooterFull(objShooter, MotorSpeeds.dShooterRPM, objFeeder, objIndexer, objIntake, objPivot));
 
+        // xboxDriver.axisGreaterThan(3, 0.25).whileTrue(
+        //     new AimandShoot2(  
+        //         objLimelight, drivetrain, objShooter, objFeeder, objIndexer, objIntake, objPivot,
+        //         () -> -xboxDriver.getLeftX(),
+        //         () -> -xboxDriver.getLeftY()
+        //     )
+            // .alongWith(
+            //     new SequentialCommandGroup(
+            //         new WaitCommand(5), drivetrain.applyRequest(() -> brake)))
+        // );
+
         xboxDriver.axisGreaterThan(3, 0.25).whileTrue(
-            new AimandShoot2(  
-                limelight, drivetrain, objShooter, objFeeder, objIndexer, objIntake, objPivot,
-                () -> xboxDriver.getLeftY(),
-                () -> xboxDriver.getLeftX()
-            )
+            new AimandShootXLock(
+                objLimelight, drivetrain, objShooter, objFeeder, objIndexer, objIntake, objPivot, 
+                () -> -xboxDriver.getLeftX(),
+                () -> -xboxDriver.getLeftY()
+                )
+                // .alongWith(objLights.shootingLights())
         );
+      
         
 
         ///TEST SHOOT FOR INTERP TABLE///
-        xboxDriver. b().whileTrue(new ShooterFull(objShooter, MotorSpeeds.dtestRPM, objFeeder, objIndexer, objIntake, objPivot));
+        // xboxDriver. b().whileTrue(new ShooterFull(objShooter, MotorSpeeds.dtestRPM, objFeeder, objIndexer, objIntake, objPivot));
 
-
-
+       
           ///Far shooter///
           /// 
-        //xboxDriver. b().whileTrue(new ShooterFull(objShooter, MotorSpeeds.dPassingRPM, objFeeder, objIndexer, objIntake, objPivot));
+        xboxDriver. b().whileTrue(new ShooterFull(objShooter, MotorSpeeds.dPassingRPM, objFeeder, objIndexer, objIntake, objPivot));
 
          ///Passing///
         xboxDriver. leftBumper().whileTrue(new Passing(objShooter, objFeeder, objIndexer, objIntake));
 
-        xboxDriver. y().toggleOnTrue(new RunCommand(()-> objShooter.runShooterRPM(0.0), objShooter)); //Original 0.15
+        xboxDriver.rightBumper().whileTrue(new ShooterFull(objShooter, MotorSpeeds.dShooterTDist, objFeeder, objIndexer, objIntake, objPivot));
+
+        xboxDriver. y().toggleOnTrue(new RunCommand(()-> objShooter.stopShooter(), objShooter));
+
 
 
         // === Intake === \\ 
-        xboxDriver.axisGreaterThan(2, 0.25).whileTrue(new RunCommand(
+        xboxDriver.axisGreaterThan(2, 0.1).whileTrue(new RunCommand(
                 ()-> objIntake.runIntake(MotorSpeeds.dIntakeSpeed), objIntake));
 
         xboxDriver.a().toggleOnTrue(new PivotIntake(objPivot, MotorSpeeds.dPivotSpeed));
 
         xboxDriver.povDown().whileTrue(new RunCommand(
-                () -> objIntake.runIntake(-MotorSpeeds.dIntakeSpeed), objIntake));
+                () -> objIntake.runIntake(-MotorSpeeds.dIntakeSpeed), objIntake)
+                            .alongWith(new RunCommand(
+                () -> objIndexer.runIndexer(0.5), objIndexer)));
+                    
 
         xboxDriver.povUp().whileTrue(new RunCommand(
                 () -> objFeeder.runFeeder(-MotorSpeeds.dFeederSpeed), objFeeder));
+
+        xboxDriver.povLeft().whileTrue(objShooter.runOnce(() -> objShooter.tweakRPM(25.0)));
+
+        xboxDriver.povRight().whileTrue(objShooter.runOnce(() -> objShooter.tweakRPM(-5.0)));
+
+
+
+        //  = PsuedoCode = \\ xboxDriver.povLeft/Right().onTrue(interp var +/- 25);
+
+        // xboxDriver.povLeft().onTrue(new RunCommand(() -> incTabVar()));
+        // xboxDriver.povRight().onTrue(new RunCommand(() -> decTabVar()));
 
        
        drivetrain.registerTelemetry(logger::telemeterize);
@@ -269,12 +310,10 @@ public class RobotContainer {
       
     }
 
-    ///// ASK KRAUSS ABOUT Swerve TO drivetrain //////
-
     private Command updateVisionCommand() {
-        return limelight.run(() ->{
+        return objLimelight.run(() ->{
             final Pose2d currentRobotPose = drivetrain.getState().Pose;
-            final Optional<Limelight.Measurement> measurement = limelight.getMeasurement(currentRobotPose);
+            final Optional<Limelight.Measurement> measurement = objLimelight.getMeasurement(currentRobotPose);
             measurement.ifPresent(m -> {
                 drivetrain.addVisionMeasurement(
                     m.poseEstimate.pose,
@@ -285,20 +324,19 @@ public class RobotContainer {
         });
     }
 
-// Pose2d poseA = new Pose2d();
-// Pose2d poseB = new Pose2d();
-
-// StructPublisher<Pose2d> publisher = NetworkTableInstance.getDefault()
-//   .getStructTopic("MyPose", Pose2d.struct).publish();
-// StructArrayPublisher<Pose2d> arrayPublisher = NetworkTableInstance.getDefault()
-//   .getStructArrayTopic("MyPoseArray", Pose2d.struct).publish();
-
-// private void periodic() {
-//   publisher.set(poseA);
-//   arrayPublisher.set(new Pose2d[] {poseA, poseB});
-// }
  
     public Command getAutonomousCommand() {
         return autoChooser.getSelected();
     }
+
+    // public double incTabVar (){
+    //     return dTableVar += 25;
+    // }
+
+    // public double decTabVar (){
+    //     return dTableVar -= 5;
+    // }
+
+    
+
 }

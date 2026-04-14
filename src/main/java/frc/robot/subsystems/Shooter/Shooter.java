@@ -26,6 +26,9 @@ import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.hardware.ParentDevice;
 
 import edu.wpi.first.units.measure.AngularVelocity;
+import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.util.sendable.SendableBuilder;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -55,23 +58,44 @@ public class Shooter extends SubsystemBase {
   private final VelocityVoltage velocityRequest = new VelocityVoltage(0.0).withSlot(0);
   private final VoltageOut voltageRequest = new VoltageOut(0);
 
+  private double dkP, dkI, dkD, dkV, dkS;
+
+  private double dTweakRPM = 0.0;
+
   private static final AngularVelocity kVelocityTolerance = RPM.of(100);
 
-  
+  TalonFXConfiguration objTalonFXConfig;
+
+
+  Sendable shooterPIDSendable;
   
   /** Creates a new Shooter. */
   public Shooter() {
 
-    TalonFXConfiguration objTalonFXConfig = new TalonFXConfiguration();
+    shooterPIDSendable = new Sendable() {
+      @Override
+      public void initSendable(SendableBuilder builder){
+          builder.addDoubleProperty("Shooter P", () -> dkP, (dNewKP) -> editShooterP(dNewKP));
+          builder.addDoubleProperty("Shooter I", () -> dkI, (dnewKI) -> editShooterI(dnewKI));
+
+          builder.addDoubleProperty("Shooter V", () -> dkV, (dnewKV) -> editShooterV(dnewKV));
+          builder.addDoubleProperty("Shooter S", () -> dkS, (dnewKS) -> editShooterS(dnewKS));
+
+      }
+    };
+
+
+    objTalonFXConfig = new TalonFXConfiguration();
+
     objTalonFXConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
     objTalonFXConfig.CurrentLimits.SupplyCurrentLimit = 40.0;
     objTalonFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
     objTalonFXConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     objTalonFXConfig.OpenLoopRamps.VoltageOpenLoopRampPeriod = 0.1;
-    objTalonFXConfig.Slot0.kP = 0.5;
-    objTalonFXConfig.Slot0.kI = 1.0;
-    objTalonFXConfig.Slot0.kD = 0.0;
-    objTalonFXConfig.Slot0.kV = 12.0 / 6000.0;
+    objTalonFXConfig.Slot0.kP = 0.7763;
+    objTalonFXConfig.Slot0.kI = 0.0;
+    objTalonFXConfig.Slot0.kV = 0.11455;
+    objTalonFXConfig.Slot0.kS = 0.2;
     objTalonFXStatusCode = StatusCode.StatusCodeNotInitialized;
     LeaderMotor = new TalonFX(MotorIDs.iShooterLeader, ports.kMechCAN);
     FollowerMotor = new TalonFX(MotorIDs.iShooterFollower, ports.kMechCAN);
@@ -104,6 +128,9 @@ public class Shooter extends SubsystemBase {
     getCurrents();
     SmartDashboard.putNumber("Shooter Supply Current", dSupplyCurrent);
     SmartDashboard.putNumber("Shooter Stator Current", dStatorCurrent);
+
+    SmartDashboard.putData("Shooter Hub/Shooter PID Adjuster", shooterPIDSendable);
+    SmartDashboard.putNumber("Tweak RPM", dTweakRPM);
   }
 
   public BooleanSupplier bsShooterFast(){
@@ -131,9 +158,8 @@ public class Shooter extends SubsystemBase {
     // dControl = dControl + dError * 0.05 / 200.0; // was 0.04
     // objShooter.set(dControl);
 
-    objShooter.setControl(velocityRequest.withVelocity(dTargetRPM / 60.0));
-
-  }
+    objShooter.setControl(velocityRequest.withVelocity((dTargetRPM + dTweakRPM) / 60.0));
+  } 
 
   public boolean isVelocityWithinTolarance() {
     return motors.stream().allMatch(motor -> {
@@ -160,5 +186,65 @@ public class Shooter extends SubsystemBase {
   public void getCurrents() {
     dStatorCurrent = objShooter.getStatorCurrent().getValueAsDouble();
     dSupplyCurrent = objShooter.getSupplyCurrent().getValueAsDouble();
+  }
+
+
+  // === Shooter PID+ Adjuster === Help from Hawk \\ 
+  public void editShooterP(double dNewKP){
+    dkP = dNewKP;
+
+    objTalonFXConfig.Slot0.kP = dkP;
+
+    objShooter.getConfigurator().apply(objTalonFXConfig);
+    objFollowShooter.getConfigurator().apply(objTalonFXConfig);
+  }
+
+  public void editShooterI(double dNewKI){
+    dkI = dNewKI;
+
+    objTalonFXConfig.Slot0.kI = dkI;
+
+    objShooter.getConfigurator().apply(objTalonFXConfig);
+    objFollowShooter.getConfigurator().apply(objTalonFXConfig);
+  }
+
+  public void editShooterV(double dNewKV){
+    dkV = dNewKV;
+
+    objTalonFXConfig.Slot0.kV = dkV;
+
+    objShooter.getConfigurator().apply(objTalonFXConfig);
+    objFollowShooter.getConfigurator().apply(objTalonFXConfig);
+  }
+
+  public void editShooterS(double dNewKS){
+    dkS = dNewKS;
+
+    objTalonFXConfig.Slot0.kS = dkS;
+
+    objShooter.getConfigurator().apply(objTalonFXConfig);
+    objFollowShooter.getConfigurator().apply(objTalonFXConfig);
+  }
+
+
+
+  // === INTERP UPDATER === \\
+
+  public double incrTableVar(double dTableVar){
+
+    dTableVar = dTableVar + 25;
+
+    return dTableVar;
+  }
+
+  public double decrTableVar(double dTableVar){
+
+    dTableVar = dTableVar - 5;
+    
+    return dTableVar;
+  }
+
+  public void tweakRPM(double dTweakVal) {
+    dTweakRPM = dTweakRPM + dTweakVal;
   }
 }

@@ -5,20 +5,24 @@
   "pathFolders": [
     "CHAOS (Left looking from DS)",
     "CHAOS (Right looking from DS)",
+    "Continuous Chez Long Left",
+    "Continuous Chez Short Left ",
+    "Continuous Chez Short Right",
     "Full Drum Right Long Trench",
-    "Full Drum Right Short Trench"
+    "Full Drum Right Short Trench",
+    "continuous Chez Long Right"
   ],
   "autoFolders": [
-    "Blue Side",
     "Double barrel",
-    "Drum"
+    "Drum Right",
+    "Drum Left"
   ],
-  "defaultMaxVel": 5.0,
-  "defaultMaxAccel": 5.0,
+  "defaultMaxVel": 4.0,
+  "defaultMaxAccel": 3.0,
   "defaultMaxAngVel": 540.0,
   "defaultMaxAngAccel": 720.0,
   "defaultNominalVoltage": 12.5,
-  "robotMass": 74.088,
+  "robotMass": 47.17,
   "robotMOI": 6.883,
   "robotTrackwidth": 0.546,
   "driveWheelRadius": 0.048,

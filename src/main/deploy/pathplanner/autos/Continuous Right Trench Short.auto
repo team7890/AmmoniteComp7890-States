@@ -5,45 +5,33 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "wait",
           "data": {
-            "pathName": "Drum Mid Travel 1"
+            "waitTime": 2.0
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Drum First Shoot"
+            "pathName": "Drum sweep Short 1 Right"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 3.0
+            "waitTime": 3.5
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Drum Middle travel 2"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Drum Second Shoot"
+            "pathName": "Drum sweep Short 2 Right"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 3.0
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Drum Hub Dash"
+            "waitTime": 3.5
           }
         }
       ]

@@ -28,25 +28,29 @@ import frc.robot.subsystems.Limelight;
 
 
 
-public class AimandShoot2 extends SequentialCommandGroup {
-
-  // private final SwerveRequest.SwerveDriveBrake brake = new SwerveDriveReq
+public class AimandShootXLock extends SequentialCommandGroup {
+  private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
 
 
   /** Creates a new AimandShoot2. */
-  public AimandShoot2(Limelight objLimelight, CommandSwerveDrivetrain objSwerve, Shooter objShooter, Feeder objFeeder, Indexer objIndexer, Intake objIntake, Pivot objPivot, DoubleSupplier dsForward, DoubleSupplier dsLeft) {
+  public AimandShootXLock(Limelight objLimelight, CommandSwerveDrivetrain objSwerve, Shooter objShooter, Feeder objFeeder, Indexer objIndexer, Intake objIntake, Pivot objPivot, DoubleSupplier dsForward, DoubleSupplier dsLeft) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
 
     addCommands(
       new ParallelCommandGroup(
         new PrepareShot(objShooter, objLimelight),
-        new AimAndDrive(objSwerve, dsForward, dsLeft),
         new SequentialCommandGroup(
-          Commands.waitSeconds(0.75),
-          new FireNTheHole(objFeeder, objIndexer, objIntake, objPivot)
+          new AimAndDrive(objSwerve, dsForward, dsLeft).withTimeout(0.7),
+          new ParallelCommandGroup(
+            new FireNTheHole(objFeeder, objIndexer, objIntake, objPivot),
+            objSwerve.applyRequest(() -> brake)
+        ))
+        // new SequentialCommandGroup(
+        //   Commands.waitSeconds(0.75),
+        //   new FireNTheHole(objFeeder, objIndexer, objIntake, objPivot)
           // new RunCommand(objSwerve.applyRequest(SwerveRequest.SwerveDriveBrake), null)
-        )
+        
       )
     );
   }

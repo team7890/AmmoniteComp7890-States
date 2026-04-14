@@ -27,8 +27,9 @@ public class FireNTheHole extends SequentialCommandGroup {
       
      new ParallelCommandGroup(
         new RunCommand(()-> objFeeder. runFeeder(MotorSpeeds.dFeederSpeed), objFeeder),
-       new RunCommand(()-> objIndexer. runIndexer(MotorSpeeds.dIndexerSpeed), objIndexer),
-       new PivotIntake(objPivot, MotorSpeeds.dPivSlow)
+        new RunCommand(()-> objIndexer. runIndexer(MotorSpeeds.dIndexerSpeed), objIndexer),
+        new RunCommand(()-> objIntake.runIntake(MotorSpeeds.dIntakeSpeed), objIntake),
+        new PivotIntake(objPivot, MotorSpeeds.dPivSlow)
         )
       );
 

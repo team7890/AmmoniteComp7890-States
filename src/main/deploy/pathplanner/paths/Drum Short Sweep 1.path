@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.3917111111147475,
-        "y": 0.44904444444478253
+        "x": 4.401455555555555,
+        "y": 0.488022222222221
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.641422270403759,
-        "y": 0.46105847484834256
+        "x": 4.651166714844567,
+        "y": 0.5000362526257813
       },
       "isLocked": false,
       "linkedName": "Drum start"
@@ -81,8 +81,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 5.0,
-    "maxAcceleration": 5.0,
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.5,
@@ -96,7 +96,7 @@
   "folder": "Full Drum Right Short Trench",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -90.1987487987268
+    "rotation": -89.71719365215553
   },
   "useDefaultConstraints": true
 }

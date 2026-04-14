@@ -1,9 +1,4 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
-
 
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
@@ -67,20 +62,20 @@ public final class Constants {
   public static class MotorSpeeds{
 
     ///Shooter RPM values///
-    public static final double dShooter3M = 3000;
+    public static final double dShooterTDist = 3960;
     public static final double dShooterRPM = 3600;
     public static final double dPassingRPM = 6000;
 
     ///TEST RPM value///
-    public static final double dtestRPM = 4550;
+    public static final double dtestRPM = 5250;
 
     ///Hopper system speeds///
     public static final double dFeederSpeed = 1.0; 
-    public static final double dIndexerSpeed = 1.0;
+    public static final double dIndexerSpeed = 1.0; // === Was 1.0
 
     ///Intake system speeds///
     public static final double dIntakeSpeed = 0.375; //Started at 0.4
-    public static final double dPivotSpeed = -0.2; //change back to 0.25
+    public static final double dPivotSpeed = -0.25; //change back to -0.25
     public static final double dPivSlow = -0.15;
 
   }
@@ -100,48 +95,19 @@ public final class Constants {
     public static final double dKey6 = 4.5;
     public static final double dKey7 = 5.0;
 
-    public static final double dRPM1 = 3200;
-    public static final double dRPM2 = 3550;
-    public static final double dRPM3 = 3900;
-    public static final double dRPM4 = 4175;
-    public static final double dRPM5 = 4550;
-    public static final double dRPM6 = 4750;
-    public static final double dRPM7 = 5000;
+    public static final double dRPM1 = 3250;  // == 3200
+    public static final double dRPM2 = 3450;  // == 3400
+    public static final double dRPM3 = 3900;  // == 3850
+    public static final double dRPM4 = 4010;  // == 3960
+    public static final double dRPM5 = 4750;  // == 4575 // == 4625  /// 4650
+    public static final double dRPM6 = 4975;  // == 4750 // == 4800  /// 4850
+    public static final double dRPM7 = 5750;  // == 5500 // = 5550   /// 5600
   }
 
   public static class MotorPositions{
-   // public static final Pos dshooterHood = 
     public static final double dPivotMax = 90;
     public static final double dPivotMin = 0;
-
-
   }
-
-  /// PHOTON STUFF ///
-   
-// public static class Vision {
-//   public static final String sCameraName = "Dragon";
-//   public static final Transform3d kRobotToCam = 
-//         new Transform3d(new Translation3d(0.1397, 0.2921, 0.4953), new Rotation3d(0.0, 0.35, 0.443));
-// public static final AprilTagFieldLayout kTagLayout = 
-//       AprilTagFieldLayout.loadField(AprilTagFields.k2026RebuiltAndymark);
-// public static final Matrix<N3, N1> kSingleTagStdDevs = 
-//       VecBuilder.fill(4.0, 4.0, 8.0);
-// public static final Matrix<N3, N1> kMultiTagStdDevs = 
-//       VecBuilder.fill(0.5, 0.5, 1.0);
-
-//    }
-  
-  
-  //  public class Landmarks {
-  //   public static Translation2d hubPosition() {
-  //     final Optional<Alliance> alliance = DriverStation.getAlliance();
-  //     if (alliance.isPresent() && alliance.get() == Alliance.Blue) {
-  //       return new Translation2d(Inches.of(469.115), Inches.of(158.845));
-  //     }
-  //     return new Translation2d(Inches.of(469.115), Inches.of(158.845));
-  //   }
-  //  }
 
    public static class Driving {
     public static final LinearVelocity kMaxSpeed = TunerConstants.kSpeedAt12Volts;

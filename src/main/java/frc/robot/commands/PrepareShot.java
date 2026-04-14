@@ -20,6 +20,8 @@ public class PrepareShot extends Command {
     private double dTimeStart;
     private double dElapsedTime;
 
+    private double dVar;
+
     public PrepareShot(Shooter shooter, Limelight objLimelight) {
         this.shooter = shooter;
         this.objlimelight = objLimelight;
@@ -48,9 +50,11 @@ public class PrepareShot extends Command {
     @Override
     public void execute() {
         final double distanceToHub = objlimelight.getDistanceToHub();
+        
+        
         dElapsedTime = Timer.getFPGATimestamp() - dTimeStart;
 
-        shooter.runShooterRPM(tableSpeed.get(distanceToHub));
+        shooter.runShooterRPM(tableSpeed.get(distanceToHub)); // === ADD TABLEVAR HERE? 
     }
 
     @Override 

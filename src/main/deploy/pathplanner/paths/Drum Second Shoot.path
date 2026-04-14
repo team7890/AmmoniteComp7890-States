@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.859444444444444,
-        "y": 6.071588888888889
+        "x": 4.859444444444443,
+        "y": 6.07158888888889
       },
       "isLocked": false,
       "linkedName": "Drum Middle 2"
@@ -47,11 +47,11 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 0.02821576763485553,
-      "rotationDegrees": -7.167657170898757
+      "rotationDegrees": 37.334678131679624
     },
     {
       "waypointRelativePos": 0.19751037344398845,
-      "rotationDegrees": 71.96190603022531
+      "rotationDegrees": 64.95373579223329
     },
     {
       "waypointRelativePos": 0.6290456431535286,
@@ -72,8 +72,8 @@
       "minWaypointRelativePos": 0.7801488833747039,
       "maxWaypointRelativePos": 2.0,
       "constraints": {
-        "maxVelocity": 8.0,
-        "maxAcceleration": 8.0,
+        "maxVelocity": 5.0,
+        "maxAcceleration": 5.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 13.0,
@@ -91,14 +91,14 @@
     },
     {
       "name": "Shoot Slower",
-      "waypointRelativePos": 2.0,
+      "waypointRelativePos": 0,
       "endWaypointRelativePos": null,
       "command": null
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 5.0,
-    "maxAcceleration": 5.0,
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.5,

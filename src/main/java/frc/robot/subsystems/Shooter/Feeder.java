@@ -55,7 +55,7 @@ public class Feeder extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Shooter Sub/Feeder Speed", iCount);
+    SmartDashboard.putNumber("Shooter Sub/Feeder Speed", getFeedSpeed());
   }
 
   public void stopFeeder(){
@@ -68,8 +68,10 @@ public class Feeder extends SubsystemBase {
   
   }
 
-  public double getSpeedRPM() {
+  public double getFeedSpeed() {
     objStatusSignal = objFeeder.getVelocity();
     return objStatusSignal.getValueAsDouble() * 60.0;  
   }
+
+  
 }

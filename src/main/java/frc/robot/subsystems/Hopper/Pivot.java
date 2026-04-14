@@ -57,22 +57,6 @@ public class Pivot extends SubsystemBase {
   }
 
 
-  // public StatusSignal<Angle> absPosition(){
-  //   return (objAbsEncoder.getAbsolutePosition());
-  // }
-
-  // public void runTilter(double dSpeed){
-  //   if (absPosition() <= MotorPositions.dPivotMin ) {
-  //     stopTilter();
-  //   }
-  //   else{
-  //     if (absPosition() >= MotorPositions.dPivotMax) {
-  //       stopTilter();
-  //     }
-  //     else objPivot.set(dSpeed);
-  //   }
-  // }
-
   public void stopPivot(){
     objPivot.stopMotor();
   }
@@ -94,14 +78,21 @@ public class Pivot extends SubsystemBase {
     return dReportedPos;
   }
 
-  // public void agitatePivot(){
-  //     if(getIntakePosition() >= 0.60){
-  //       objPivot.set(0.1);
-  //     }
-  //     else{
-  //       if (getIntakePosition() <= 0.67) {
-  //         objPivot.set(-0.1);
-  //       }
-  //     }
-  // }
 }
+
+
+  // public StatusSignal<Angle> absPosition(){
+  //   return (objAbsEncoder.getAbsolutePosition());
+  // }
+
+  // public void runTilter(double dSpeed){
+  //   if (absPosition() <= MotorPositions.dPivotMin ) {
+  //     stopTilter();
+  //   }
+  //   else{
+  //     if (absPosition() >= MotorPositions.dPivotMax) {
+  //       stopTilter();
+  //     }
+  //     else objPivot.set(dSpeed);
+  //   }
+  // }

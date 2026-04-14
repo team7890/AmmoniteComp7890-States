@@ -25,6 +25,7 @@ public class Limelight extends SubsystemBase {
     private final NetworkTable telemetryTable;
     private final StructPublisher<Pose2d> posePublisher;
     private double dLastKnownDistance = 0.0;
+    private boolean bHasTarget = false;
 
     public Limelight(String name) {
         this.name = name;
@@ -50,7 +51,7 @@ public class Limelight extends SubsystemBase {
         // 1. Use the more stable position from MegaTag2
         // 2. Use the rotation from MegaTag1 (with low confidence) to counteract gyro drift
         poseEstimate_MegaTag2.pose = new Pose2d(
-            poseEstimate_MegaTag2.pose.getTranslation(),
+            poseEstimate_MegaTag1.pose.getTranslation(), // === Switched from 2
             poseEstimate_MegaTag1.pose.getRotation()
         );
         final Matrix<N3, N1> standardDeviations = VecBuilder.fill(0.1, 0.1, 10.0);
@@ -66,11 +67,13 @@ public class Limelight extends SubsystemBase {
                 poseEstimate_MegaTag2 == null
                 || poseEstimate_MegaTag2.tagCount == 0
         ) {
+            bHasTarget = false;
             return dLastKnownDistance;
         }
         final Translation2d robotPosition = poseEstimate_MegaTag2.pose.getTranslation();
         final Translation2d hubPosition = Landmarks.hubPosition(); 
         dLastKnownDistance = robotPosition.getDistance(hubPosition); 
+        bHasTarget = true;
         return dLastKnownDistance;
     }
 
@@ -103,5 +106,9 @@ public class Limelight extends SubsystemBase {
     @Override 
     public void periodic() {
         SmartDashboard.putNumber("Distance to Hub", getDistanceToHub());
+        SmartDashboard.putBoolean("LL has target", bHasTarget);
     }
+
+
+    
 }

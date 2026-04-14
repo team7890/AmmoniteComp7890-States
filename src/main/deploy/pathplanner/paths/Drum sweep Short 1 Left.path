@@ -1,0 +1,173 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 4.408497768373092,
+        "y": 7.603237943768711
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 4.927655555555556,
+        "y": 7.504022222222222
+      },
+      "isLocked": false,
+      "linkedName": "Drum start Left"
+    },
+    {
+      "anchor": {
+        "x": 7.227344444444444,
+        "y": 7.524
+      },
+      "prevControl": {
+        "x": 6.97758343706794,
+        "y": 7.5130711759885145
+      },
+      "nextControl": {
+        "x": 8.115324836051107,
+        "y": 7.562855470385296
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 6.632933333333334,
+        "y": 4.104
+      },
+      "prevControl": {
+        "x": 7.1322044973189165,
+        "y": 4.130987123086426
+      },
+      "nextControl": {
+        "x": 5.911844404951559,
+        "y": 4.065022952915703
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 6.340600000003828,
+        "y": 7.485
+      },
+      "prevControl": {
+        "x": 6.5876930320725835,
+        "y": 7.446986403707744
+      },
+      "nextControl": {
+        "x": 6.093506967935077,
+        "y": 7.523013596292257
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.939788888888889,
+        "y": 7.075266666666667
+      },
+      "prevControl": {
+        "x": 2.9574091934032936,
+        "y": 7.604596050731383
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "DSS 1 Left"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.131950207468846,
+      "rotationDegrees": 61.76700000000001
+    },
+    {
+      "waypointRelativePos": 1.7892116182572664,
+      "rotationDegrees": 46.944
+    },
+    {
+      "waypointRelativePos": 1.915352697095437,
+      "rotationDegrees": -48.52600000000001
+    },
+    {
+      "waypointRelativePos": 2.6788381742738427,
+      "rotationDegrees": -48.514
+    },
+    {
+      "waypointRelativePos": 3.130290456431484,
+      "rotationDegrees": -0.0
+    },
+    {
+      "waypointRelativePos": 3.6414937759335975,
+      "rotationDegrees": -0.0
+    }
+  ],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0,
+      "maxWaypointRelativePos": 1.09975186104219,
+      "constraints": {
+        "maxVelocity": 4.0,
+        "maxAcceleration": 5.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.5,
+        "unlimited": false
+      }
+    },
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 2.8387096774193874,
+      "maxWaypointRelativePos": 4.0,
+      "constraints": {
+        "maxVelocity": 4.0,
+        "maxAcceleration": 5.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.5,
+        "unlimited": false
+      }
+    }
+  ],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Intake Pivot",
+      "waypointRelativePos": 0.20248138957816006,
+      "endWaypointRelativePos": 0.9806451612903151,
+      "command": null
+    },
+    {
+      "name": "Run Intake",
+      "waypointRelativePos": 0.4565756823821259,
+      "endWaypointRelativePos": 3.4263027295285666,
+      "command": null
+    },
+    {
+      "name": "Shoot Slower",
+      "waypointRelativePos": 4.0,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.5,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -61.055553029015684
+  },
+  "reversed": false,
+  "folder": "Continuous Chez Short Left ",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 90.73098732353986
+  },
+  "useDefaultConstraints": true
+}

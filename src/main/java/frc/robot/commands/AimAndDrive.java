@@ -29,7 +29,8 @@ public class AimAndDrive extends Command {
     private static final Angle kAimTolerance = Degrees.of(5);
     
     private final CommandSwerveDrivetrain swerve;
-    private final DriveInputSmoother inputSmoother;
+    // private final DriveInputSmoother inputSmoother;
+    private DoubleSupplier dsFwd, dsLeft;
 
 
 
@@ -47,7 +48,9 @@ public class AimAndDrive extends Command {
         DoubleSupplier leftInput
     ) {
         this.swerve = swerve;
-        this.inputSmoother = new DriveInputSmoother(forwardInput, leftInput);
+        // this.inputSmoother = new DriveInputSmoother(forwardInput, leftInput);
+        dsFwd = forwardInput;
+        dsLeft = leftInput;
         addRequirements(swerve);
     }
 
@@ -74,13 +77,15 @@ public class AimAndDrive extends Command {
 
     @Override
     public void execute() {
-        final ManualDriveInput input = inputSmoother.getSmoothInput();
+        // final ManualDriveInput input = inputSmoother.getSmoothInput();
         swerve.setControl(
             fieldCentricFacingAngleRequest
-            .withVelocityX(Driving.kMaxSpeed.times(input.forward))
-            .withVelocityY(Driving.kMaxSpeed.times(input.left))
+            // .withVelocityX(Driving.kMaxSpeed.times(input.forward))
+            // .withVelocityY(Driving.kMaxSpeed.times(input.left))
+            .withVelocityX(Driving.kMaxSpeed.times(dsLeft.getAsDouble()))
+            .withVelocityY(Driving.kMaxSpeed.times(dsFwd.getAsDouble()))
             .withTargetDirection(getDirectionToHub())
-            );
+        );
     }
 
     @Override
