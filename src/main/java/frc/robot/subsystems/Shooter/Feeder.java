@@ -26,6 +26,8 @@ public class Feeder extends SubsystemBase {
   private StatusCode objFeederStatusCode;
   private StatusSignal objStatusSignal;
   private int iCount = 0;
+
+  private double dStatorCurrent, dSupplyCurrent;
   /** Creates a new Feeder. */
   
   public Feeder() {
@@ -56,6 +58,7 @@ public class Feeder extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Shooter Sub/Feeder Speed", getFeedSpeed());
+    SmartDashboard.putNumber("Shooter Sub/Feeder Supply", dSupplyCurrent);
   }
 
   public void stopFeeder(){
@@ -71,6 +74,11 @@ public class Feeder extends SubsystemBase {
   public double getFeedSpeed() {
     objStatusSignal = objFeeder.getVelocity();
     return objStatusSignal.getValueAsDouble() * 60.0;  
+  }
+
+  public void getCurrents() {
+    dStatorCurrent = objFeeder.getStatorCurrent().getValueAsDouble();
+    dSupplyCurrent = objFeeder.getSupplyCurrent().getValueAsDouble();
   }
 
   

@@ -21,6 +21,8 @@ public class Intake extends SubsystemBase {
   private StatusCode objTalonFXStatusCode;
   private StatusSignal objStatusSignal;
 
+  public double dStatorCurrent, dSupplyCurrent;
+
   
   /** Creates a new Intake. */
   public Intake() {
@@ -43,7 +45,9 @@ public class Intake extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    getCurrents();
     SmartDashboard.putNumber("Hopper Sub/Intake Speed", getSpeed());
+    SmartDashboard.putNumber("Hopper Sub/Intake Supply", dSupplyCurrent);
   }
 
    public void stopIntake(){
@@ -58,6 +62,11 @@ public class Intake extends SubsystemBase {
   public double getSpeed() {
     objStatusSignal = objIntake.getVelocity();
     return objStatusSignal.getValueAsDouble() * 60.0;  
+  }
+
+  public void getCurrents() {
+    dStatorCurrent = objIntake.getStatorCurrent().getValueAsDouble();
+    dSupplyCurrent = objIntake.getSupplyCurrent().getValueAsDouble();
   }
 
 }

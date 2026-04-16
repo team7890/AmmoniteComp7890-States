@@ -25,6 +25,8 @@ public class Indexer extends SubsystemBase {
   private StatusCode objTalonFXStatusCode;
   StatusSignal objStatusSignalLead;
   StatusSignal objStatusSignalFollow;
+
+  double dStatorCurrent, dSupplyCurrent;
   /** Creates a new Hopper. */
   public Indexer() {
     TalonFXConfiguration objTalonFXConfig = new TalonFXConfiguration();
@@ -53,6 +55,12 @@ public class Indexer extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Hopper Sub/Index Lead", getLeadSpeed());
     SmartDashboard.putNumber("Hopper Sub/Index Follow", getFollowSpeed());
+
+    getCurrents();
+    SmartDashboard.putNumber("Hopper Sub/Indexer Supply Current", dSupplyCurrent);
+    SmartDashboard.putNumber("Hopper Sub/Indexer Stator Current", dStatorCurrent);
+
+    
   }
 
   public void runIndexer(double dSpeed){
@@ -71,5 +79,10 @@ public class Indexer extends SubsystemBase {
   public double getFollowSpeed() {
     objStatusSignalFollow = objIndexerFollower.getVelocity();
     return objStatusSignalFollow.getValueAsDouble() * 60.0;  
+  }
+
+  public void getCurrents() {
+    dStatorCurrent = objIndexerLeader.getStatorCurrent().getValueAsDouble();
+    dSupplyCurrent = objIndexerLeader.getSupplyCurrent().getValueAsDouble();
   }
 }

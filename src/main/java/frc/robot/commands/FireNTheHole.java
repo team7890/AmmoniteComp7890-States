@@ -24,13 +24,33 @@ public class FireNTheHole extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      
-     new ParallelCommandGroup(
-        new RunCommand(()-> objFeeder. runFeeder(MotorSpeeds.dFeederSpeed), objFeeder),
-        new RunCommand(()-> objIndexer. runIndexer(MotorSpeeds.dIndexerSpeed), objIndexer),
-        new RunCommand(()-> objIntake.runIntake(MotorSpeeds.dIntakeSpeed), objIntake),
-        new PivotIntake(objPivot, MotorSpeeds.dPivSlow)
+
+
+      new RunCommand(()-> objFeeder. runFeeder(MotorSpeeds.dFeederSpeed), objFeeder).withTimeout(0.15),
+        
+        new ParallelCommandGroup(
+          new RunCommand(()-> objFeeder. runFeeder(MotorSpeeds.dFeederSpeed), objFeeder),
+          new RunCommand(()-> objIndexer. runIndexer(MotorSpeeds.dIndexerSpeed), objIndexer)
+
+        ).withTimeout(0.15),
+        new ParallelCommandGroup(
+          new RunCommand(()-> objFeeder. runFeeder(MotorSpeeds.dFeederSpeed), objFeeder),
+          new RunCommand(()-> objIndexer. runIndexer(MotorSpeeds.dIndexerSpeed), objIndexer),
+          new RunCommand(()-> objIntake.runIntake(MotorSpeeds.dIntakeSpeed), objIntake)
+        ).withTimeout(0.1),
+        new ParallelCommandGroup(
+          new RunCommand(()-> objFeeder. runFeeder(MotorSpeeds.dFeederSpeed), objFeeder),
+          new RunCommand(()-> objIndexer. runIndexer(MotorSpeeds.dIndexerSpeed), objIndexer),
+          new RunCommand(()-> objIntake.runIntake(MotorSpeeds.dIntakeSpeed), objIntake),
+          new PivotIntake(objPivot, MotorSpeeds.dPivSlow)
         )
+      
+    //  new ParallelCommandGroup(
+    //     new RunCommand(()-> objFeeder. runFeeder(MotorSpeeds.dFeederSpeed), objFeeder),
+    //     new RunCommand(()-> objIndexer. runIndexer(MotorSpeeds.dIndexerSpeed), objIndexer),
+    //     new RunCommand(()-> objIntake.runIntake(MotorSpeeds.dIntakeSpeed), objIntake),
+    //     new PivotIntake(objPivot, MotorSpeeds.dPivSlow)
+    //     )
       );
 
   }

@@ -23,13 +23,27 @@ public class Feed extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+      new RunCommand(()-> objFeeder. runFeeder(MotorSpeeds.dFeederSpeed), objFeeder).withTimeout(0.15),
       
-     new ParallelCommandGroup(
+      new ParallelCommandGroup(
+        new RunCommand(()-> objFeeder. runFeeder(MotorSpeeds.dFeederSpeed), objFeeder),
+        new RunCommand(()-> objIndexer. runIndexer(MotorSpeeds.dIndexerSpeed), objIndexer)
+
+      ).withTimeout(0.15),
+      new ParallelCommandGroup(
         new RunCommand(()-> objFeeder. runFeeder(MotorSpeeds.dFeederSpeed), objFeeder),
         new RunCommand(()-> objIndexer. runIndexer(MotorSpeeds.dIndexerSpeed), objIndexer),
         new RunCommand(()-> objIntake.runIntake(MotorSpeeds.dIntakeSpeed), objIntake)
-        )
-      );
+      )
+        
+    );
+    
+      
+    //  new ParallelCommandGroup(
+    //     new RunCommand(()-> objFeeder. runFeeder(MotorSpeeds.dFeederSpeed), objFeeder),
+    //     new RunCommand(()-> objIndexer. runIndexer(MotorSpeeds.dIndexerSpeed), objIndexer),
+    //     new RunCommand(()-> objIntake.runIntake(MotorSpeeds.dIntakeSpeed), objIntake)
+    //     )
 
   }
 }

@@ -59,6 +59,7 @@ public class Shooter extends SubsystemBase {
   private final VoltageOut voltageRequest = new VoltageOut(0);
 
   private double dkP, dkI, dkD, dkV, dkS;
+  private double dRPM;
 
   private double dTweakRPM = 0.0;
 
@@ -68,6 +69,8 @@ public class Shooter extends SubsystemBase {
 
 
   Sendable shooterPIDSendable;
+
+  Sendable rpmAdjust;
   
   /** Creates a new Shooter. */
   public Shooter() {
@@ -88,7 +91,7 @@ public class Shooter extends SubsystemBase {
     objTalonFXConfig = new TalonFXConfiguration();
 
     objTalonFXConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
-    objTalonFXConfig.CurrentLimits.SupplyCurrentLimit = 40.0;
+    objTalonFXConfig.CurrentLimits.SupplyCurrentLimit = 80.0;
     objTalonFXConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
     objTalonFXConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     objTalonFXConfig.OpenLoopRamps.VoltageOpenLoopRampPeriod = 0.1;
@@ -131,6 +134,8 @@ public class Shooter extends SubsystemBase {
 
     SmartDashboard.putData("Shooter Hub/Shooter PID Adjuster", shooterPIDSendable);
     SmartDashboard.putNumber("Tweak RPM", dTweakRPM);
+
+
   }
 
   public BooleanSupplier bsShooterFast(){
@@ -225,7 +230,6 @@ public class Shooter extends SubsystemBase {
     objShooter.getConfigurator().apply(objTalonFXConfig);
     objFollowShooter.getConfigurator().apply(objTalonFXConfig);
   }
-
 
 
   // === INTERP UPDATER === \\

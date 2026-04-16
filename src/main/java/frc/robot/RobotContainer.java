@@ -200,7 +200,7 @@ public class RobotContainer {
         );
 
         objShooter.setDefaultCommand(
-            new RunCommand(()-> objShooter.runShooterRPM(4000), objShooter) //Original 0.15
+            new RunCommand(()-> objShooter.stopShooter(), objShooter) //Original 0.15 // === States = 4000rpm
         );
 
         objPivot.setDefaultCommand(
@@ -266,8 +266,10 @@ public class RobotContainer {
        
           ///Far shooter///
           /// 
-        xboxDriver. b().whileTrue(new ShooterFull(objShooter, MotorSpeeds.dPassingRPM, objFeeder, objIndexer, objIntake, objPivot));
+        xboxDriver. b().whileTrue(new ShooterFull(objShooter, MotorSpeeds.dtestRPM, objFeeder, objIndexer, objIntake, objPivot));
 
+        
+        
          ///Passing///
         xboxDriver. leftBumper().whileTrue(new Passing(objShooter, objFeeder, objIndexer, objIntake));
 

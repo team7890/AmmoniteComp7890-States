@@ -67,16 +67,16 @@ public final class Constants {
     public static final double dPassingRPM = 6000;
 
     ///TEST RPM value///
-    public static final double dtestRPM = 5250;
+    public static final double dtestRPM = 4000;
 
     ///Hopper system speeds///
-    public static final double dFeederSpeed = 1.0; 
-    public static final double dIndexerSpeed = 1.0; // === Was 1.0
+    public static final double dFeederSpeed = 0.75; 
+    public static final double dIndexerSpeed = 0.75;
 
     ///Intake system speeds///
-    public static final double dIntakeSpeed = 0.375; //Started at 0.4
+    public static final double dIntakeSpeed = 0.375; //Changed from 0.375
     public static final double dPivotSpeed = -0.25; //change back to -0.25
-    public static final double dPivSlow = -0.15;
+    public static final double dPivSlow = -0.15; // == -0.15
 
   }
 

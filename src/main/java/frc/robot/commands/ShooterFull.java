@@ -29,7 +29,7 @@ public class ShooterFull extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new RunCommand(() -> objShooter.runShooterRPM(dShootSpeed), objShooter).withTimeout(0.75),
+      new RunCommand(() -> objShooter.runShooterRPM(dShootSpeed), objShooter).withTimeout(0.5),
       //
       new ParallelRaceGroup(
         new RunCommand(() -> objShooter.runShooterRPM(dShootSpeed), objShooter),
